@@ -8,9 +8,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 
-async def get_response_gtp(session: ClientSession, msg: str) -> str:
+async def get_response_from_gtp(session: ClientSession, msg: str) -> str:
     """
     Вернет ответ от нейронки на msg
+    Так как запрос идет к бесплатной версии qwen3, то это работает долго -_-
+
     :param session: ClientSession
     :param msg: сообщение для нейронки
     :return: ответ от нейронки
@@ -35,10 +37,10 @@ async def get_response_gtp(session: ClientSession, msg: str) -> str:
 
 async def main_gpt(msg: str) -> str:
     async with ClientSession() as session:
-        result = await get_response_gtp(session=session, msg=msg)
-    print(result)
+        result = await get_response_from_gtp(session=session, msg=msg)
     return result
 
 
 if __name__ == "__main__":
-    asyncio.run(main_gpt("как дела?"))
+    answer = asyncio.run(main_gpt("как дела?"))
+    print(answer)
