@@ -8,6 +8,10 @@ from app.api.articles.models import ArticlesModelDB, ArticlesModel
 class ArticlesCrud:
     @staticmethod
     async def get_summary_by_url(url: ArticlesModel) -> str | dict[str, str]:
+        """
+        Вернет из БД sammury статьи по ее url
+        :param url: url ссылка на статью wiki
+        """
         async with session_maker.begin() as session:
             query = select(ArticlesSchemas).where(ArticlesSchemas.url == url.url)
             result = await session.execute(query)
@@ -18,6 +22,9 @@ class ArticlesCrud:
 
     @staticmethod
     async def create_articles_in_db(articles_input: ArticlesModelDB) -> None:
+        """
+        Сохранит в БД до 5 статей
+        """
         async with session_maker.begin() as session:
             articles = ArticlesSchemas(**articles_input.model_dump())
             session.add(articles)
