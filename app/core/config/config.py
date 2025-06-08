@@ -25,7 +25,7 @@ class DataBaseSettings(BaseSettings):
     DB_HOST: str = str(os.getenv("DB_HOST"))
     DB_PORT: int = int(os.getenv("DB_PORT"))
     DB_NAME: str = str(os.getenv("DB_NAME"))
-    echo: bool = True
+    echo: bool = False
 
     @property
     def database_url_asyncpg(self):
